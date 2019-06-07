@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn import linear_model
 
 # import dataset into pandas dataframe
 data = pd.read_csv('pqe_data_syd.csv')
@@ -8,12 +10,10 @@ X = data.iloc[:, :-1].values
 y = data.iloc[:, 1].values
 
 # split dataset into training and test sets
-from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1/3, random_state=0)
 
-# build regression model
-from sklearn.linear_model import LinearRegression
-regressor = LinearRegression()
+# build ridge regression model with moderate regularisation strength
+regressor = linear_model.Ridge(alpha=0.5)
 regressor.fit(X_train, y_train)
 
 # visualisation of training set
@@ -38,8 +38,4 @@ vistest.show()
 pqe = int(input('How many PQE are you: '))
 y_pred = regressor.predict([[pqe]])
 print(y_pred)
-
-
-
-
 
