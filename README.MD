@@ -3,3 +3,4 @@ A simple Python regression-based machine learning model to predict Australian la
 
 *TODO*
 * Take into account location when calculating PQE salary
+* Turn into Flask webapp
