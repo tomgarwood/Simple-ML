@@ -27,6 +27,7 @@ dump(regressor, 'model.joblib')  # dump trained model for future use
 # regressor = load('model.joblib')
 
 # test tools, uncomment to review
+"""
 for i, col_name in enumerate(X_train.columns):
     print("The coefficient for {} is {}".format(col_name, regressor.coef_[0][i]))
 intercept = regressor.intercept_[0]
@@ -35,6 +36,7 @@ y_predit = regressor.predict(X_test)
 regressor_mse = mean_squared_error(y_predit, y_test)
 print(math.sqrt(regressor_mse))
 print(regressor.score(X_test, y_test))
+"""
 
 print(regressor.predict([[3, 0, 0, 1, 0, 0, 0, 1]]))
 
