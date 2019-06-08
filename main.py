@@ -1,46 +1,40 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn import linear_model
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 from joblib import dump, load
+import math
 
 # import dataset into a pandas dataframe
-data = pd.read_csv('pqe_data_syd.csv')
-X = data.iloc[:, :-1].values
-y = data.iloc[:, 1].values
+data = pd.read_csv('data/pqe_data_tier_city.csv')
+data['tier'] = data['tier'].replace({1: 'top', 2: 'mid', 3: 'small'})
+data = pd.get_dummies(data, columns=['tier'])
+data['location'] = data['location'].replace({1: 'syd', 2: 'melb', 3: 'bris', 4: 'per'})
+data = pd.get_dummies(data, columns=['location'])
+print(data.head())
 
-# split dataset into training and test sets
+# create test/train data split
+X = data.drop('package', axis=1)
+y = data[['package']]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=1/3, random_state=0)
 
-# build ridge regression model with moderate regularisation strength
-regressor = linear_model.Ridge(alpha=0.5)
+# train machine learning regression model
+regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 dump(regressor, 'model.joblib')  # dump trained model for future use
 
 # uncomment to load trained model
 # regressor = load('model.joblib')
 
-# visualisation of training set
-vistraining = plt
-vistraining.scatter(X_train, y_train, color='red')
-vistraining.plot(X_train, regressor.predict(X_train), color='blue')
-vistraining.title('PQE Package (Training Set)')
-vistraining.xlabel('PQE')
-vistraining.ylabel('Package')
-vistraining.show()
+# test tools, uncomment to review
+for i, col_name in enumerate(X_train.columns):
+    print("The coefficient for {} is {}".format(col_name, regressor.coef_[0][i]))
+intercept = regressor.intercept_[0]
+print("The intercept for this model is {}".format(intercept))
+y_predit = regressor.predict(X_test)
+regressor_mse = mean_squared_error(y_predit, y_test)
+print(math.sqrt(regressor_mse))
+print(regressor.score(X_test, y_test))
 
-# visualisation of test set
-vistest = plt
-vistest.scatter(X_test, y_test, color='red')
-vistest.plot(X_train, regressor.predict(X_train), color='blue')
-vistest.title('PQE Package (Test Set)')
-vistest.xlabel('PQE')
-vistest.ylabel('Package')
-vistest.show()
-
-# PQE salary predictor
-pqe = int(input('How many PQE are you: '))
-y_pred = regressor.predict([[pqe]])
-print(y_pred)
+print(regressor.predict([[3, 0, 0, 1, 0, 0, 0, 1]]))
 
