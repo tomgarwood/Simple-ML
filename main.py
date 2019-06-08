@@ -1,9 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 from joblib import dump, load
-import math
+from user_input import getpqe, getlocation, gettier
 
 # import dataset into a pandas dataframe
 data = pd.read_csv('data/pqe_data_tier_city.csv')
@@ -11,7 +10,6 @@ data['tier'] = data['tier'].replace({1: 'top', 2: 'mid', 3: 'small'})
 data = pd.get_dummies(data, columns=['tier'])
 data['location'] = data['location'].replace({1: 'syd', 2: 'melb', 3: 'bris', 4: 'per'})
 data = pd.get_dummies(data, columns=['location'])
-print(data.head())
 
 # create test/train data split
 X = data.drop('package', axis=1)
@@ -28,6 +26,8 @@ dump(regressor, 'model.joblib')  # dump trained model for future use
 
 # test tools, uncomment to review
 """
+from sklearn.metrics import mean_squared_error
+import math
 for i, col_name in enumerate(X_train.columns):
     print("The coefficient for {} is {}".format(col_name, regressor.coef_[0][i]))
 intercept = regressor.intercept_[0]
@@ -37,6 +37,16 @@ regressor_mse = mean_squared_error(y_predit, y_test)
 print(math.sqrt(regressor_mse))
 print(regressor.score(X_test, y_test))
 """
+pqe = getpqe()
+loc = getlocation()
+syd = float(1) if loc == 'syd' else float(0)
+mel = float(1) if loc == 'mel' else float(0)
+bris = float(1) if loc == 'bris' else float(0)
+per = float(1) if loc == 'per' else float(0)
+tier = gettier()
+top = float(1) if tier == 'top' else float(0)
+mid = float(1) if tier == 'mid' else float(0)
+small = float(1) if tier == 'small' else float(0)
 
-print(regressor.predict([[3, 0, 0, 1, 0, 0, 0, 1]]))
+print(regressor.predict([[pqe, mid, small, top, bris, mel, per, syd]]))
 
