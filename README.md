@@ -1,6 +1,7 @@
 # Simple ML for Australian Lawyer Salaries
 A simple Python-based supervised regression machine learning model to predict Australian lawyer salaries based on PQE years, law firm tier, and location. PQE data gathered from various 2019 recruitment resources.
 
+### Web App ###
 Hosted on Heroku at: https://simple-ml.herokuapp.com/
 
 ### Local Installation ###
