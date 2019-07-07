@@ -1,14 +1,32 @@
 <!doctype html>
-<title>Simple ML for Australian Legal Salaries</title>
-<h1>Simple ML for Australian Legal Salaries</h1>
-<p>A simple supervised regression-based machine learning model to predict Australian lawyer salaries based on PQE years, law firm tier, and location.</p>
-<p>PQE data gathered from various 2019 recruitment resources.</p>
-<form method="POST">
-    Location <i>(syd, melb, bris, per)</i>: <input type="text" name="loc">
-    <br>
-    Post-Qualified Experience (PQE) <i>(years)</i>: <input type="text" name="pqe">
-    <br>
-    Tier <i>(top, mid, small)</i>: <input type="text" name="tier">
-    <br>
-    <input type="submit" name="submit">
-</form>
+<html>
+<head>
+    <title>Simple ML for Australian Legal Salaries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+<div class="container-fluid">
+    <h1>Simple ML for Australian Lawyer Salaries</h1>
+    <p>A simple supervised regression-based machine learning model to predict Australian lawyer salaries based on PQE years, law firm tier, and location.</p>
+    <p>PQE data gathered from various 2019 recruitment resources.</p>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="loc">Location: </label>
+            <input type="text" name="loc">
+            <small id="locHelp" class="form-text text-muted">Please enter location as syd, melb, bris, per</small>
+        </div>
+        <div class="form-group">
+            <label for="pqe">PQE: </label>
+            <input type="number" name="pqe">
+        </div>
+        <div class="form-group">
+            <label for="tier">Tier: </label>
+            <input type="text" name="tier">
+            <small id="locHelp" class="form-text text-muted">Please enter tier as top, mid, small</small>
+        </div>
+        <input type="submit" name="submit" class="btn btn-primary">
+    </form>
+</div>
+</body>
+</html>
