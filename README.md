@@ -6,6 +6,7 @@ A simple Python supervised regression-based machine learning model to predict Au
 1. git clone repository
 2. cd Simple-ML
 3. pip install -r requirements.txt
+4. start Flask server in webapp.py
 
 ### Usage ####
 The script can be run from the included trained model ('model.joblib') or retrained against the included dataset ('/data/pqe_data_tier_city.csv'). Run 'main.py' and the script will prompt for user input on PQE, location and law firm tier before generating the estimated salary.

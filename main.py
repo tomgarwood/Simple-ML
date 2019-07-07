@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from joblib import dump, load
-from user_input import getpqe, getlocation, gettier
 
 # import dataset into a pandas dataframe
 """
