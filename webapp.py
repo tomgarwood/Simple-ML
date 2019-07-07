@@ -15,5 +15,6 @@ def userform():
     salary = '${:0,.0f}'.format(regressor(loc, pqe, tier))
     return render_template('result.html', salary=salary, loc=loc, pqe=pqe, tier=tier)
 
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    port = int(os.getenv('PORT', 5000))
+    app.run(debug=False, port=port, host='0.0.0.0')
