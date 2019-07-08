@@ -1,8 +1,8 @@
 # Simple ML for Australian Lawyer Salaries
-A simple Python-based supervised regression machine learning model to predict Australian lawyer salaries based on PQE years, law firm tier, and location. PQE data gathered from various 2019 recruitment resources.
+A simple Python-based supervised regression machine learning model to predict Australian lawyer salaries based on PQE years, law firm tier, and location. PQE salary data gathered from various 2019 recruitment resources.
 
 ### Web App ###
-Hosted on Heroku at: https://simple-ml.herokuapp.com/
+Hosted on Heroku at: https://simple-ml.herokuapp.com/ (hosted on a free dyno, so it may take a second to spin up).
 
 ### Local Installation ###
 1. git clone repository
@@ -11,7 +11,7 @@ Hosted on Heroku at: https://simple-ml.herokuapp.com/
 4. start Flask server in webapp.py
 
 ### Local Usage ####
-The script can be run from the included trained model ('model.joblib') or retrained against the included dataset ('/data/pqe_data_tier_city.csv'). Run 'main.py' and the script will prompt for user input on PQE, location and law firm tier before generating the estimated salary. Hosted version available here: Hosted on Heroku at: https://simple-ml.herokuapp.com/ 
+The web app can be visited at http://0.0.0.0:5000/ once the Flask server is started. Enter location, PQE, and law firm tier to calculate salary. By default it runs from an included trained model ('model.joblib'), but can also be retrained against the included dataset ('/data/pqe_data_tier_city.csv'). 
 
 ### TODO ###
 * Gather anonymised user data to expand dataset
